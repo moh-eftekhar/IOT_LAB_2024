@@ -8,18 +8,18 @@ class Student:
     def get_age(self):
         return dt.datetime.now().year - self.birthyear
     
-    def show(self):
-        return f"{self.name} {self.surname} is {self.get_age()} years old"
-    
+    #with command is used to open the file and close it automatically
     def save(self):
-        stu_file = open("student.txt", "a")
-        stu_file.write(f"{self.name},{self.surname},{self.birthyear}\n")
+        with open("student.txt", "a") as stu_file:
+            stu_file.write(f"{self.name},{self.surname},{self.birthyear}\n")
+
+        print(f"{self.name} {self.surname} is {self.get_age()} years old")
     
 
 if __name__ == "__main__":
-    name = input("Enter your name: ")
-    surname = input("Enter your surname: ")
-    brithyear = int(input("Enter your birth year: "))
-    studentA = Student(name, surname, brithyear)
-    print(studentA.show())
-    studentA.save()
+    while True:
+        name = input("Enter your name: ")
+        surname = input("Enter your surname: ")
+        brithyear = int(input("Enter your birth year: "))
+        studentA = Student(name, surname, brithyear)
+        studentA.save()

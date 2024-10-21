@@ -1,3 +1,4 @@
+import datetime as dt
 class Student:
     def __init__(self, name, surname, birthyear):
         self.name = name
@@ -5,8 +6,7 @@ class Student:
         self.birthyear = birthyear
 
     def get_age(self):
-        return 2024 - self.birthyear
-
+        return dt.datetime.now().year - self.birthyear
     def show(self):
         return f"{self.name} {self.surname} is {self.get_age()} years old"
 

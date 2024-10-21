@@ -7,8 +7,13 @@ class Student:
 
     def get_age(self):
         return dt.datetime.now().year - self.birthyear
+    
     def show(self):
         return f"{self.name} {self.surname} is {self.get_age()} years old"
+    
+    def save(self):
+        stu_file = open("student.txt", "a")
+        stu_file.write(f"{self.name},{self.surname},{self.birthyear}\n")
     
 
 if __name__ == "__main__":
@@ -17,3 +22,4 @@ if __name__ == "__main__":
     brithyear = int(input("Enter your birth year: "))
     studentA = Student(name, surname, brithyear)
     print(studentA.show())
+    studentA.save()

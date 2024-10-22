@@ -17,6 +17,8 @@ class Student:
     
 
 if __name__ == "__main__":
+    f = open("student.txt")
+    print(f.read())
     while True:
         name = input("Enter your name: ")
         surname = input("Enter your surname: ")

@@ -1,5 +1,6 @@
 import datetime as dt
 import json
+import os
 class Student:
     def __init__(self, name, surname, birthyear, degree):
         self.name = name
@@ -57,8 +58,23 @@ class Student:
         #print(dictionary_student)
         return dictionary_student
     def savejason(self):
-        with open("student.json", "a") as stu_file:
-            json.dump(self.asDictionary(),stu_file, indent=4)
+        filename = "student.json"
+        # Check if the file exists and read its content
+        if os.path.exists(filename):
+            with open(filename, "r") as stu_file:
+                try:
+                    students = json.load(stu_file)
+                except json.JSONDecodeError:
+                    students = []
+        else:
+            students = []
+
+        # Append the new student dictionary
+        students.append(self.asDictionary())
+
+        # Write the updated list back to the file
+        with open(filename, "w") as stu_file:
+            json.dump(students, stu_file, indent=4)
     
     #with command is used to open the file and close it automatically
     def save(self):

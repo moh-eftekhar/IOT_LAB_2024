@@ -1,12 +1,26 @@
-{
-    "name": "Sara",
-    "surname": "Salmani",
-    "birthYear": 1999,
-    "votes": [
-        24,
-        27,
-        18,
-        30,
-        21
-    ]
-}
+[
+    {
+        "name": "Rahman",
+        "surname": "Nezami",
+        "birthYear": 1986,
+        "votes": [
+            24,
+            27,
+            18,
+            30,
+            21
+        ]
+    },
+    {
+        "name": "Mohammad",
+        "surname": "Soltani",
+        "birthYear": 1988,
+        "votes": [
+            24,
+            27,
+            18,
+            30,
+            21
+        ]
+    }
+]

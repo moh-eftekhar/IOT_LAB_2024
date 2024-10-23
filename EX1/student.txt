@@ -13,3 +13,6 @@ Mastaneh,Mohajer,1969,Master
 Mosi,Rahimi,1988,Master
 Akbar,Akbari,1956,Bachelor
 Sara,Salmani,1999,Bachelor
+Mori,Ahmadi,2000,Bachelor
+Rahman,Nezami,1986,Master
+Mohammad,Soltani,1988,Bachelor

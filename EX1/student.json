@@ -1,0 +1,12 @@
+{
+    "name": "Sara",
+    "surname": "Salmani",
+    "birthYear": 1999,
+    "votes": [
+        24,
+        27,
+        18,
+        30,
+        21
+    ]
+}

@@ -36,7 +36,7 @@ class Calculator:
             self.result = self.paramlist[0]
             for i in range(1,len(self.paramlist)):
                 self.result /= self.paramlist[i]
-        self.result_json["result"] = self.result
+        self.result_json["result"] = round(self.result,2)
         self.result_json["operation"] = "div"
         return self.result_json
     

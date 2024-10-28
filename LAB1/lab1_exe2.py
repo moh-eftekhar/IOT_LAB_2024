@@ -1,88 +1,85 @@
-# import json
-# class Calculator:
-#     def __init__(self,paramlist):
-#         self.paramlist = paramlist
-#         self.result = None
-#         self.operation = None
-#         self.result_jason = {"operation": self.operation,"operands":self.paramlist, "result": self.result}
-#         self.file = open("output.json", "a")
-
-#     def add(self):
-#         self.result = sum([float(i) for i in self.paramlist])
-#         self.result_jason["operation"] = "add"
-#         self.result_jason["result"] = self.result
-#         json.dump(self.result_jason, self.file, indent=4)
-#         self.file.flush()
-#         return self.result
-    
-   
-
-
-# if __name__ == "__main__":
-#     print("Welcome to the calculator")
-#     while True:
-#         print("Enter 1 for addition")
-#         print("Enter 2 for subtraction")
-#         print("Enter 3 for multiplication")
-#         print("Enter 4 for division")
-#         print("Enter 5 to exit")
-#         choice = int(input("Enter your choice: "))
-
-#         if choice == 5:
-#             break
-
-#         paramlist = input("Enter numbers separated by ,: ").split(",")
-#         paramlist = [float(num) for num in paramlist]
-
-
-#         if choice == 1:
-#             calc = Calculator(paramlist)
-#             print("Result:", calc.add())
-
 import json
+import os
 
 class Calculator:
-    def __init__(self, paramlist):
+    def __init__(self,paramlist):
         self.paramlist = paramlist
         self.result = None
         self.operation = None
         self.result_json = {"operation": self.operation, "operands": self.paramlist, "result": self.result}
 
     def add(self):
-        self.result = sum([float(i) for i in self.paramlist])
+        self.result = sum(self.paramlist)
         self.result_json["operation"] = "add"
         self.result_json["result"] = self.result
         return self.result_json
-
-# Function to save the JSON results properly
-def save_to_file(data):
-    with open("output.json", "w") as file:
-        json.dump(data, file, indent=4)
+    
+    def sub(self):
+        self.result = self.paramlist[0]
+        for i in range(1,len(self.paramlist)):
+            self.result -= self.paramlist[i]
+        self.result_json = {"operation": "sub", "operands": self.paramlist, "result": self.result}
+        return self.result_json
+    
+    def mul(self):
+        self.result = 1
+        for i in self.paramlist:
+            self.result *= i
+        self.result_json["operation"] = "mul"
+        self.result_json["result"] = self.result
+        return self.result_json
+    
+    def div(self):
+        if 0 in self.paramlist:
+            self.result = "Division by zero is not allowed."
+        else:
+            self.result = self.paramlist[0]
+            for i in range(1,len(self.paramlist)):
+                self.result /= self.paramlist[i]
+        self.result_json["result"] = self.result
+        self.result_json["operation"] = "div"
+        return self.result_json
+    
+    def savejson(self):
+        filename = "calculator.json"
+        if os.path.exists(filename):
+            with open(filename, "r") as file:
+                try:
+                    calculator = json.load(file)
+                except json.JSONDecodeError:
+                    calculator = []
+        else:
+            calculator = []
+        
+        calculator.append(self.result_json)
+        with open(filename, "w") as cal_file:
+            json.dump(calculator, cal_file, indent=4)
 
 if __name__ == "__main__":
-    print("Welcome to the calculator")
-
-    results = []
-
-    while True:
-        print("Enter 1 for addition")
-        print("Enter 2 for subtraction")
-        print("Enter 3 for multiplication")
-        print("Enter 4 for division")
-        print("Enter 5 to exit")
-        choice = int(input("Enter your choice: "))
-
-        if choice == 5:
+    condition = True
+    while condition:
+        operation = input("Enter operation: add/sub/mul/div/exit: ")
+        if operation == "exit":
+            print("Calculator closed.")
             break
+        elif operation not in ["add", "sub", "mul", "div"]:
+            print("Invalid operation. Please enter a valid operation.")
+            continue
+        paramlist = input("Enter operands separated by comma: ").split(",")
+        for i in range(len(paramlist)):
+            paramlist[i] = float(paramlist[i])
+        mycal = Calculator(paramlist)
+        if operation == "add":
+            mycal.add()
+            print(json.dumps(mycal.result_json, indent=4))
+        elif operation == "sub":
+            mycal.sub()
+            print(json.dumps(mycal.result_json, indent=4))
+        elif operation == "mul":
+            mycal.mul()
+            print(json.dumps(mycal.result_json, indent=4))
+        elif operation == "div":
+            mycal.div()
+            print(json.dumps(mycal.result_json, indent=4))
 
-        paramlist = input("Enter numbers separated by ,: ").split(",")
-        paramlist = [float(num) for num in paramlist]
-
-        if choice == 1:
-            calc = Calculator(paramlist)
-            result = calc.add()
-            results.append(result)
-            print("Result:", result["result"])
-
-    # Save all the results at once when the program ends
-    save_to_file(results)
+        mycal.savejson()

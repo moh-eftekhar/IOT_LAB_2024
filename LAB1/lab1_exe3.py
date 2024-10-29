@@ -1,32 +1,39 @@
 import json
 
-# Load the JSON file
-with open('catalog.json', 'r') as file:
-    data = json.load(file)
+with open("catalog.json", "r") as f:
+    catalog = json.load(f)
+# a = catalog["devicesList"][*]["availableServices"]
+# print(json.dumps(a, indent=4))
 
-# Function to search for devices by name
-def searchByName(device_name):
-    devices = data.get('devicesList', [])
-    results = [device for device in devices if device.get('deviceName') == device_name]
+# get the value of the key devicesList
+def searchByname (devicename):
+    device = catalog.get("devicesList",[])
+    for devices in device:
+        if devices.get("deviceName") == devicename:
+            return devices
     
-    if results:
-        for device in results:
-            print(json.dumps(device, indent=4))
-    else:
-        print(f"No devices found with the name: {device_name}")
-
-# Function to search for devices by ID
-def searchByID(device_id):
-    devices = data.get('devicesList', [])
-    device = next((device for device in devices if device.get('deviceID') == device_id), None)
+def searchById (deviceid):
+    device = catalog.get("devicesList",[])
+    for devices in device:
+        if devices.get("deviceID") == deviceid:
+            return devices
+        
+def searchByserice(servicename):
+    result = []
+    devices = catalog.get("devicesList",[])
+    for device in devices:
+        if servicename in device.get("availableServices",[]):
+            result.append(device)
     
-    if device:
-        print(json.dumps(device, indent=4))
-    else:
-        print(f"No device found with ID: {device_id}")
+    return result
 
-# Example usage
-# device_name = input("Enter the name of the device you want to search for: ")
-# searchByName("device_name")
-device_ID = int(input("Enter the ID of the device you want to search for: "))
-searchByID(device_ID)
+
+
+# Device_name = searchByname("VCNL4010")
+# print(json.dumps(Device_name, indent=4))
+
+# Device_id = searchById(1)
+# print(json.dumps(Device_id, indent=4))
+
+Device_service = searchByserice("MQTT")
+print(json.dumps(Device_service, indent=4))

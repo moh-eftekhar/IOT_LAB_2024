@@ -1,0 +1,3 @@
+
+for execute the Cherrypy I should execute this code:
+.\venv\Scripts\activate

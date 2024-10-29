@@ -16,3 +16,4 @@ Sara,Salmani,1999,Bachelor
 Mori,Ahmadi,2000,Bachelor
 Rahman,Nezami,1986,Master
 Mohammad,Soltani,1988,Bachelor
+nader,naderi,1996,Master

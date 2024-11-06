@@ -1,14 +1,18 @@
 import cherrypy
-
+def string_reverse(string):
+    return string[::-1]
 class HelloWorld:
     exposed = True
     def GET(self,*uri,**params):
-        output = "Hello World!"
-        if len(uri) != 0:
-            output += "<br>uri: " + ',' .join(uri)
+        output = []
+        if len(uri) > 0:
+            for i in range(len(uri)):
+                output = string_reverse(uri[i])
+            
+
         
-        if params != {}:
-            output += "<br>params: " + ','.join(params)
+        # if params != {}:
+        #     output += "<br>params: " + ','.join(params)
         
         return output
     

@@ -1,5 +1,6 @@
 import cherrypy
 import json
+import requests
 def string_reverse(string):
     return string[::-1]
 class HelloWorld:

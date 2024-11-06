@@ -16,6 +16,16 @@ class HelloWorld:
         #     output += "<br>params: " + ','.join(params)
         
         return output
+    
+    def put(self, *uri, **params):
+        bodyRaw = cherrypy.request.body.read()
+        bodyjson = json.loads(bodyRaw)
+        output = ""
+        if len(uri) > 0:
+            for pathi in uri:
+                output += string_reverse(pathi) + "<br>"
+        
+        return output
 
     
 if __name__ == '__main__':

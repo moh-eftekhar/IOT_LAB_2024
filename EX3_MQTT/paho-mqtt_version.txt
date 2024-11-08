@@ -1,0 +1,27 @@
+C:\Users\meftekhar>pip install paho-mqtt==1.6.1
+Collecting paho-mqtt==1.6.1
+  Using cached paho-mqtt-1.6.1.tar.gz (99 kB)
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: paho-mqtt
+  Building wheel for paho-mqtt (setup.py) ... done
+  Created wheel for paho-mqtt: filename=paho_mqtt-1.6.1-py3-none-any.whl size=65648 sha256=a977e509f45d923c5e060b886011b641f48699dd710b3922499fe32b2a68a93a
+  Stored in directory: c:\users\meftekhar\appdata\local\pip\cache\wheels\23\d5\af\1f3cbcc350dec9d8e95040f388e0163d132eff0c9a453db659
+Successfully built paho-mqtt
+Installing collected packages: paho-mqtt
+  Attempting uninstall: paho-mqtt
+    Found existing installation: paho-mqtt 2.1.0
+    Uninstalling paho-mqtt-2.1.0:
+      Successfully uninstalled paho-mqtt-2.1.0
+Successfully installed paho-mqtt-1.6.1
+
+C:\Users\meftekhar>pip show paho-mqtt
+Name: paho-mqtt
+Version: 1.6.1
+Summary: MQTT version 5.0/3.1.1 client class
+Home-page: http://eclipse.org/paho
+Author: Roger Light
+Author-email: roger@atchoo.org
+License: Eclipse Public License v2.0 / Eclipse Distribution License v1.0
+Location: C:\Users\meftekhar\AppData\Local\Programs\Python\Python312\Lib\site-packages
+Requires:
+Required-by:

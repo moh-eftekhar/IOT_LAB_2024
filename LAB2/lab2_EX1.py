@@ -32,7 +32,6 @@ class Webcalculator:
                 return text_to_return
 
     def add(self,operation,operand):
-        print("operand: ",operand)
         for i in range(len(operand)):
             if i == 0:
                 result = operand[i]
@@ -42,7 +41,6 @@ class Webcalculator:
         return json.dumps(result_json, indent=4)
     
     def sub(self,operation,operand):
-        print("operand: ",operand)
         for i in range(len(operand)):
             if i == 0:
                 result = operand[i]
@@ -52,7 +50,6 @@ class Webcalculator:
         return json.dumps(result_json, indent=4)
     
     def mul(self,operation,operand):
-        print("operand: ",operand)
         for i in range(len(operand)):
             if i == 0:
                 result = operand[i]
@@ -62,7 +59,6 @@ class Webcalculator:
         return json.dumps(result_json, indent=4)
     
     def div(self,operation,operand):
-        print("operand: ",operand)
         for i in range(len(operand)):
             if i == 0:
                 result = operand[i]
@@ -85,6 +81,7 @@ if __name__ == '__main__':
 
     webService = Webcalculator()
     cherrypy.tree.mount(webService, '/', conf)
+    # cherrypy.config.update({'server.socket_host': ''})
     cherrypy.config.update({'server.socket_port': 8080})
     cherrypy.engine.start()
     cherrypy.engine.block()

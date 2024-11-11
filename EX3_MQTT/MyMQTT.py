@@ -4,10 +4,10 @@ import paho.mqtt.client as PahoMQTT
 
 
 class MyMQTT:
-    def __init__(self, clientID, broker, port, notifier):
+    def __init__(self, clientID, broker, port):
         self.broker = broker
         self.port = port
-        self.notifier = notifier
+        # self.notifier = notifier
         self.clientID = clientID
         self._topic = ""
         self._isSubscriber = False

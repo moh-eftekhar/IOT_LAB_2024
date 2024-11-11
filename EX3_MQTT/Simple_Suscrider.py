@@ -3,7 +3,7 @@ import time
 
 class SimpleSubscriber:
     def __init__(self, clientID, port, broker, topic_subscribe):
-        self.client = MyMQTT(clientID, "test.mosquitto.org", 1883, self)
+        self.client = MyMQTT(clientID, "test.mosquitto.org", 1883)
         self.broker = broker 
         self.port = port
         self.topic_subscribe = topic_subscribe

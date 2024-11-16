@@ -1,4 +1,5 @@
 import requests
+import json
 
 def get_operation():
     print("Select operation:")
@@ -6,36 +7,39 @@ def get_operation():
     print("sub")
     print("mul")
     print("div")
-    operation = input("Enter choice (add/sub/mul/div): ")
+    print("exit")
+    operation = input("Enter choice (add/sub/mul/div/exit): ")
     return operation
 
 def get_operands():
     operand1 = float(input("Enter first operand: "))
     operand2 = float(input("Enter second operand: "))
-    return operand1, operand2
+    operand3 = float(input("Enter third operand: "))
+    return operand1, operand2, operand3
 
-def invoke_calculator_service(operation, operand1, operand2):
-    url = 'http://localhost:8080'  # Replace with your actual URL
+def invoke_calculator_service(operation, operand1, operand2, operand3):
+    url = f'http://localhost:8080/{operation}'#?operand1={operand1}&operand2={operand2}'
     payload = {
-        'operation': operation,
         'operand1': operand1,
-        'operand2': operand2
+        'operand2': operand2,
+        'operand3': operand3
     }
-    response = requests.get(url, json=payload)
-    print("response ------>>>>>>",response)
+    response = requests.get(url, params=payload)
     if response.status_code == 200:
-        return response
+        return response.json()
     else:
         print(f"Request failed with status code {response.status_code}")
         return None
 
 def main():
-    operation = get_operation()
-    operand1, operand2 = get_operands()
-    print(f"--------->>>>>>Operation: {operation}, Operand1: {operand1}, Operand2: {operand2}")
-    result = invoke_calculator_service(operation, operand1, operand2)
-    if result:
-        print(f"The result of the operation is: {result['result']}")
+    while True:
+        operation = get_operation()
+        if operation == 'exit':
+            break
+        operand1, operand2,operand3 = get_operands()
+        result = invoke_calculator_service(operation, operand1, operand2,operand3)
+        if result:
+            print(json.dumps(result, indent=4))
 
 if __name__ == '__main__':
     main()
